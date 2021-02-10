@@ -1,0 +1,2 @@
+# JokesCore
+project for jokes
