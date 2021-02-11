@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-JokesCore-17082728-2533-44D8-9496-02F4630E3E02</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\Own.css~RF1de8b3d8.TMP" />
+    <Content Remove="wwwroot\css\Own.css~RF1de98689.TMP" />
+    <Content Remove="wwwroot\css\Own.css~RF1dec141a.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json~RF1dd50b30.TMP" />
+    <None Remove="appsettings.json~RF1dd53aeb.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8" />
+  </ItemGroup>
+
+</Project>

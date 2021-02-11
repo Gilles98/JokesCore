@@ -1,0 +1,74 @@
+﻿.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 15%; 
+    position: fixed;
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 2rem; /* Place content 60px from the top */
+}
+ul {
+    list-style-type: none;
+}
+
+li:hover {
+    cursor: pointer;
+}
+a:not([href]):not([tabindex]) {
+    color:red;
+}
+    ul li ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.5s ease;
+    margin-top: .5rem;
+    left: 0;
+    display: none;
+    color: #818181;
+}
+
+        ul li:hover > ul,
+        ul li ul:hover {
+            visibility: visible;
+            opacity: 1;
+            display: block;
+        }
+    /* The navigation menu links */
+    .sidenav a {
+        padding:0.6rem;
+        font-size: 1.4rem;
+        color: #818181;
+        display: block;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: rgb(0, 0, 40);
+            text-decoration:none;
+            background-color:darkorange;
+        }
+
+@media screen and (max-device-height:820px) and (max-device-width:959px) {
+    .navbar{
+        padding-left:0;
+        padding-top:.5rem;
+    }
+    .sidenav ul{
+        padding:0;
+    }
+
+    ul li ul {
+        font-weight:bold;
+    }
+    .sidenav {
+        background:white;
+        width:100%;
+        position:initial;
+        overflow-x: visible;
+    }
+} 
