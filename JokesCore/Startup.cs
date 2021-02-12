@@ -12,6 +12,10 @@ using JokesCore.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using JokesCore.service;
 
 namespace JokesCore
 {
@@ -31,9 +35,22 @@ namespace JokesCore
                 options.UseSqlServer(
                     Configuration.GetConnectionString("JokesCore")));
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddControllersWithViews();
-            services.AddRazorPages();
+
+            var mailkit = Configuration.GetSection("Email").Get<MailKitOptions>();
+
+            services.AddTransient<IEmailSender, EmailSender>(i =>
+                new EmailSender(
+                    Configuration["EmailSender:Host"],
+                    Configuration.GetValue<int>("EmailSender:Port"),
+                    Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                    Configuration["EmailSender:UserName"],
+                    Configuration["EmailSender:Password"]
+                )
+            );
+            services.AddMvc();
+
         }
         public async Task CreateUserRoles(IServiceProvider serviceProvider)
         {
