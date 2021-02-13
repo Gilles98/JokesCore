@@ -14,6 +14,7 @@
   <ItemGroup>
     <None Remove="appsettings.json~RF1dd50b30.TMP" />
     <None Remove="appsettings.json~RF1dd53aeb.TMP" />
+    <None Remove="Views\Home\Index.cshtml~RF31d53a9.TMP" />
   </ItemGroup>
 
   <ItemGroup>

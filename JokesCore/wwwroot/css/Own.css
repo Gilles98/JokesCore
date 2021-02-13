@@ -37,7 +37,7 @@ a:not([href]):not([tabindex]) {
             display: block;
         }
     /* The navigation menu links */
-    .sidenav a {
+    .sidenav a ,.btnLogout{
         padding:0.6rem;
         font-size: 1.4rem;
         color: #818181;
@@ -45,9 +45,13 @@ a:not([href]):not([tabindex]) {
         text-decoration: none;
         transition: 0.3s;
     }
+    .btnLogout{
+        background-color:transparent;
+        border:none;
+    }
 
         /* When you mouse over the navigation links, change their color */
-        .sidenav a:hover {
+        .sidenav a:hover,.btnLogout:hover{
             color: rgb(0, 0, 40);
             text-decoration:none;
             background-color:darkorange;
