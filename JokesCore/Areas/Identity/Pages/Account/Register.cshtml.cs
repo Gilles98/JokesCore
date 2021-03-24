@@ -112,7 +112,7 @@ namespace JokesCore.Areas.Identity.Pages.Account
                         protocol: Request.Scheme,
                         host: Request.Host.ToString());
 
-                        await _emailSender.SendEmailAsync(user.Email, "Bevestiging", $"<a href=\"{callbackUrl}\">Bevestig je account<a/> \n accountgegevens: {user.Email}  {Input.Password} verzonden door host: {Request.Host}");
+                        await _emailSender.SendEmailAsync(user.Email, "Bevestiging", $"<a href=\"{callbackUrl}\">Confirm your account<a/> <br> Details: {user.Email}  {Input.Password}");
                     if (await _userManager.IsEmailConfirmedAsync(user))
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });

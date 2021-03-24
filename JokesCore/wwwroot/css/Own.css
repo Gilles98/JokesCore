@@ -6,13 +6,24 @@
     top: 0;
     left: 0;
     background-color: #111;
-    overflow-x: hidden;
     padding-top: 2rem;
     display:block;
 
 }
 ul {
     list-style-type: none;
+}
+.circleHover {
+    pointer-events: none; /* the fix! */
+    display: none;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+   filter: invert(1);
+   background-color: black;
+    position: absolute;
+    border: 2px solid rgba(0,0,0,0.5);
+    opacity: 0.6;
 }
 
 li:hover {
@@ -38,7 +49,6 @@ a:not([href]):not([tabindex]) {
             opacity: 1;
             display: block;
         }
-    /* The navigation menu links */
     .sidenav a ,.btnLogout{
         padding:0.6rem;
         font-size: 1.4em;
@@ -52,7 +62,6 @@ a:not([href]):not([tabindex]) {
         border:none;
     }
 
-        /* When you mouse over the navigation links, change their color */
         .sidenav a:hover,.btnLogout:hover{
             color: rgb(0, 0, 40);
             text-decoration:none;

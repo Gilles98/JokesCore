@@ -9,44 +9,46 @@
     <link rel="stylesheet" href="~/css/Own.css" />
 </head>
 <body>
+
     <div class="container">
+
         <header class="col-sm-12 col-md-3 col-lg-3">
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light">
+            <nav class="navbar navbar-expand-xl navbar-toggleable-sm navbar-light">
 
 
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <div class="navbar-nav sidenav flex-grow-1">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <div class="navbar-nav sidenav flex-grow-1">
 
-                            <ul>
-                                <li>
-                                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>
-                                <partial name="_LoginPartial" />
-                                <li>
-                                    <a>
-                                        Categorieën
-                                    </a>
-                                    <ul class="dropdown">
-                                        <li>
-                                            <a href="#">Nieuw</a>
-                                        </li>
+                        <ul>
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <partial name="_LoginPartial" />
+                            <li>
+                                <a>
+                                    Categorieën
+                                </a>
+                                <ul class="dropdown">
+                                    <li>
+                                        <a href="#">Nieuw</a>
+                                    </li>
 
-                                        <li>
-                                            <a href="#">Droog</a>
-                                        </li>
+                                    <li>
+                                        <a href="#">Droog</a>
+                                    </li>
 
-                                        <li>
-                                            <a href="#">Flauw</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                                    <li>
+                                        <a href="#">Flauw</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
 
@@ -63,9 +65,35 @@
             &copy; 2021 - JokesCore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    <div class="circleHover">
+        <div />
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script>
+            $(function () {
+                let mouseX = 0;
+                let mouseY = 0;
+                let xp = 0;
+                let yp = 0;
+
+                $(".sidenav ul li").mouseover(function () {
+                    $(this).mousemove(function (e) {
+                        e.stopPropagation();
+                        $(".circleHover").css({
+                            top: e.pageY - $(".circleHover").height() / 2,
+                            left: e.pageX - $(".circleHover").width() / 2,
+                            display: "block",
+                            "z-index": 9999
+                        });
+                    })
+                });
+                $(".sidenav ul ").mouseleave(function () {
+                    $(".circleHover").css("display","none");
+                });
+            });
+            
+        </script>
+        @RenderSection("Scripts", required: false)
 </body>
 </html>
