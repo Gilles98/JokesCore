@@ -65,32 +65,65 @@
             &copy; 2021 - JokesCore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <div class="circleHover">
+    <div class="circleHover" id="circleH">
         <div />
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script>
             $(function () {
-                let mouseX = 0;
-                let mouseY = 0;
-                let xp = 0;
-                let yp = 0;
-
+                //$(".circleHover").css({
+                //    display: "block",
+                //    "border-color": "darkgoldenrod",
+                //    "z-index": 9999
+                //});
+                //$("body").keydown(function (e) {
+                //    var k = $(".circleHover");
+                //    if (e.keyCode == 37) {
+                //        k.css("left", k.position().left - 5 + "px");
+                //    }
+                //    if (e.keyCode == 38) {
+                //        k.css("top", k.position().top - 5 + "px");
+                //    }
+                //    if (e.keyCode == 39) {
+                //        k.css("left", k.position().left + 5 + "px");
+                //    }
+                //    if (e.keyCode == 40) {
+                //        k.css("top", k.position().top + 5 + "px");
+                //    }
+                 
+                //});
                 $(".sidenav ul li").mouseover(function () {
+
                     $(this).mousemove(function (e) {
-                        e.stopPropagation();
                         $(".circleHover").css({
                             top: e.pageY - $(".circleHover").height() / 2,
-                            left: e.pageX - $(".circleHover").width() / 2,
+                            left: e.pageX - $(".circleHover").width() / 2 - 5,
                             display: "block",
+                            "border-color": "darkgoldenrod",
                             "z-index": 9999
                         });
-                    })
+
+                    });
+                    
                 });
                 $(".sidenav ul ").mouseleave(function () {
                     $(".circleHover").css("display","none");
                 });
+                setInterval(function () {
+                    var k = $(".circleHover").css("border-width");
+                    if (k == "2px") {
+                        k = "5px";
+                        b = "red";
+                    }
+                    else {
+                        k = "2px";
+                    }
+                    $(".circleHover").animate({
+                        "border-width": k,
+                    },600)
+
+                }, 1000);
             });
             
         </script>
