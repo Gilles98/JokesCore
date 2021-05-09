@@ -9,6 +9,7 @@ using JokesCore.Models;
 using JokesCore.Data;
 using Microsoft.AspNetCore.Identity;
 using JokesCore.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace JokesCore.Controllers
 {
@@ -34,15 +35,33 @@ namespace JokesCore.Controllers
             //}
 
             //test
-             IdentityUser check = await _userManager.FindByEmailAsync("guigilles@gmail.com");
-            model.Joke = _context.Jokes.Where(x => x.AccountId == check.Id).FirstOrDefault();
-            model.Email = check.Email;
+            
+            List<Joke> k = await _context.Jokes.ToListAsync();
+            model.Jokes = new List<Joke>(k.TakeLast(3).Reverse());
+            model.Emails = new List<string>();
+            foreach (Joke item in model.Jokes)
+            {
+                IdentityUser check;
+                if (string.IsNullOrEmpty(item.AccountId))
+                {
+                    model.Emails.Add("Anoniem");
+                }
+                else
+                {
+                    check = await _userManager.FindByIdAsync(item.AccountId);
+                    model.Emails.Add(check.Email);
+                }
+            }
+             await _userManager.FindByEmailAsync("guigilles@gmail.com");
+            model.NewJoke = new Joke() { Rating = 0 };
+           
+            model.NewJoke.Account = await _userManager.GetUserAsync(HttpContext.User);
+         
              return View(model);
         }
 
         public IActionResult Privacy()
-        {
-            return View();
+        {            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -9,8 +9,13 @@ namespace JokesCore.ViewModels
 {
     public class TestJokeViewModel
     {
-        public Joke Joke { get; set; }
+        //load home
+        public List<Joke> Jokes { get; set; }
 
-        public string Email { get; set; }
+        public List<string> Emails { get; set; }
+
+        //create joke
+
+        public Joke NewJoke { get; set; }
     }
 }

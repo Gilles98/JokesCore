@@ -14,7 +14,7 @@
     <p>Deze pagina is op dit moment nog onder constructie</p>
 </div>
 
-<div>
+<div class="col-12">
     <header>
         <h2>
             Nieuwe grappen
@@ -23,8 +23,8 @@
     @for (int i = 0; i < 3; i++)
     {
         <div class="col-6 jokeItem">
-            <p>Gebruiker: @Model.Email</p>
-            <p>@Model.Joke.Bericht</p>
+            <p>Gebruiker: @Model.Emails[i]</p>
+            <p>@Model.Jokes[i].Bericht</p>
             <p class="stars">
                 lalala
                 <span class="fa fa-star star-0"></span>
@@ -36,6 +36,33 @@
         </div>
     }
 
+</div>
+
+<div class="col-sm-12">
+    <form asp-controller="Joke" asp-action="Create">
+        <input id="hidden" type="hidden" asp-for="NewJoke.AccountId" />
+        <input id="hidden" type="hidden" asp-for="NewJoke.Rating" />
+        <header>
+            <h2>
+                Grap aanmaken
+            </h2>
+        </header>
+        <div>
+            <div class="form-group col-md-6">
+                <label asp-for="NewJoke.Bericht">Typ hier de grap</label>
+                @*<span asp-validation-for="GeselecteerdeDokter" class="text-danger"></span>*@
+            </div>
+        </div>
+        <div>
+            <div class="form-group col-md-6">
+                <textarea class="form-control" rows="5" asp-for="NewJoke.Bericht"></textarea>
+                @*<span asp-validation-for="GeselecteerdeDokter" class="text-danger"></span>*@
+            </div>
+        </div>
+        <div class="form-row col-md-6">
+            <button type="submit" class="btn btn-primary form-control">Register</button>
+</div>
+    </form>
 </div>
 
 <script>

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using JokesCore.Data;
+using JokesCore.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +13,14 @@ namespace JokesCore.Controllers
     public class JokeController : Controller
     {
         // GET: JokeController
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public JokeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
         public ActionResult Index()
         {
             return View();
@@ -21,25 +32,42 @@ namespace JokesCore.Controllers
             return View();
         }
 
-        // GET: JokeController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: JokeController/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: JokeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> CreateAsync(TestJokeViewModel model)
         {
-            try
-            {
+           
+                try
+                {
+                if (ModelState.IsValid)
+                {
+                    if (User.Identity.Name != null)
+                    {
+                        model.NewJoke.Account = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                        model.NewJoke.AccountId = model.NewJoke.Account.Id;
+                    }
+                    await _context.Jokes.AddAsync(model.NewJoke);
+                    int ok = await _context.SaveChangesAsync();
+                    if (ok > 0)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                }
+                catch
+                {
+                    return View();
+                }
+         
+            
         }
 
         // GET: JokeController/Edit/5
