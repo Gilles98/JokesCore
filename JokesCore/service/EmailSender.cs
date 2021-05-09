@@ -28,11 +28,13 @@ namespace JokesCore.service
 
             public Task SendEmailAsync(string email, string subject, string htmlMessage)
             {
-                var client = new SmtpClient(host, port)
-                {
-                    Credentials = new NetworkCredential(userName, password),
-                    EnableSsl = enableSSL
+            var client = new SmtpClient(host, port)
+            {
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(userName, password),
+                EnableSsl = enableSSL
                 };
+
                 return client.SendMailAsync(
                     new MailMessage(userName, email, subject, htmlMessage) { IsBodyHtml = true }
                 );

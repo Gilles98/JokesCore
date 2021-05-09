@@ -4,16 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - JokesCore</title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/Own.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-    <div class="container">
+    <div class="container-fluid">
 
         <header class="col-sm-12 col-md-3 col-lg-3">
-            <nav class="navbar navbar-expand-xl navbar-toggleable-sm navbar-light">
+            <nav class="navbar  navbar-expand-xl navbar-toggleable-xl navbar-light">
 
 
 
@@ -21,10 +24,10 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <div class="navbar-nav sidenav flex-grow-1">
+                <div class=" collapse navbar-collapse d-xl-inline-flex flex-xl-row-reverse">
+                    <div>
 
-                        <ul>
+                        <ul class="navbar-nav sidenav flex-grow-1" >
                             <li>
                                 <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
@@ -54,7 +57,7 @@
 
         </header>
 
-        <div class="container col-md-9 col-lg-9">
+        <div class="container-fluid col-md-9 col-lg-8">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
@@ -65,10 +68,9 @@
             &copy; 2021 - JokesCore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <div class="circleHover" id="circleH">
-        <div />
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*<div class="circleHover" id="circleH">
+        <div />*@
+        
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script>
             $(function () {
@@ -93,38 +95,38 @@
                 //    }
                  
                 //});
-                $(".sidenav ul li").mouseover(function () {
+            //    $(".sidenav ul li").mouseover(function () {
 
-                    $(this).mousemove(function (e) {
-                        $(".circleHover").css({
-                            top: e.pageY - $(".circleHover").height() / 2,
-                            left: e.pageX - $(".circleHover").width() / 2 - 5,
-                            display: "block",
-                            "border-color": "darkgoldenrod",
-                            "z-index": 9999
-                        });
+            //        $(this).mousemove(function (e) {
+            //            $(".circleHover").css({
+            //                top: e.pageY - $(".circleHover").height() / 2,
+            //                left: e.pageX - $(".circleHover").width() / 2 - 5,
+            //                display: "block",
+            //                "border-color": "darkgoldenrod",
+            //                "z-index": 9999
+            //            });
 
-                    });
+            //        });
                     
-                });
-                $(".sidenav ul ").mouseleave(function () {
-                    $(".circleHover").css("display","none");
-                });
-                setInterval(function () {
-                    var k = $(".circleHover").css("border-width");
-                    if (k == "2px") {
-                        k = "5px";
-                        b = "red";
-                    }
-                    else {
-                        k = "2px";
-                    }
-                    $(".circleHover").animate({
-                        "border-width": k,
-                    },600)
+            //    });
+            //    $(".sidenav ul ").mouseleave(function () {
+            //        $(".circleHover").css("display","none");
+            //    });
+            //    setInterval(function () {
+            //        var k = $(".circleHover").css("border-width");
+            //        if (k == "2px") {
+            //            k = "5px";
+            //            b = "red";
+            //        }
+            //        else {
+            //            k = "2px";
+            //        }
+            //        $(".circleHover").animate({
+            //            "border-width": k,
+            //        },600)
 
-                }, 1000);
-            });
+            //    }, 1000);
+            //});
             
         </script>
         @RenderSection("Scripts", required: false)

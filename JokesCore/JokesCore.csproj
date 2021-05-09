@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20210509150706_UpdateJoke.cs" />
+    <Compile Remove="Data\Migrations\20210509150706_UpdateJoke.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\css\Own.css~RF1de8b3d8.TMP" />
     <Content Remove="wwwroot\css\Own.css~RF1de98689.TMP" />
     <Content Remove="wwwroot\css\Own.css~RF1dec141a.TMP" />

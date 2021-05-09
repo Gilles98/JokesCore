@@ -4,14 +4,16 @@ using JokesCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JokesCore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210509151045_UpdateJoke")]
+    partial class UpdateJoke
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,21 +21,6 @@ namespace JokesCore.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("JokesCore.Models.Categorie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Naam")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categorie");
-                });
 
             modelBuilder.Entity("JokesCore.Models.Joke", b =>
                 {
@@ -56,28 +43,6 @@ namespace JokesCore.Data.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Joke");
-                });
-
-            modelBuilder.Entity("JokesCore.Models.JokeCategorie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategorieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("JokeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategorieId");
-
-                    b.HasIndex("JokeId");
-
-                    b.ToTable("JokeCategorie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -285,21 +250,6 @@ namespace JokesCore.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId");
-                });
-
-            modelBuilder.Entity("JokesCore.Models.JokeCategorie", b =>
-                {
-                    b.HasOne("JokesCore.Models.Categorie", "Categorie")
-                        .WithMany("jokeCategories")
-                        .HasForeignKey("CategorieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("JokesCore.Models.Joke", "Joke")
-                        .WithMany("jokeCategories")
-                        .HasForeignKey("JokeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

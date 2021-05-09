@@ -6,21 +6,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using JokesCore.Models;
+using JokesCore.Data;
+using Microsoft.AspNetCore.Identity;
+using JokesCore.ViewModels;
 
 namespace JokesCore.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
+
+            _context = context;
+            _userManager = userManager;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+             TestJokeViewModel model = new TestJokeViewModel();
+            //if (User.Identity.Name != null)
+            //{
+            //  userID = _userManager.GetUserId(User);
+            //}
+
+            //test
+             IdentityUser check = await _userManager.FindByEmailAsync("guigilles@gmail.com");
+            model.Joke = _context.Jokes.Where(x => x.AccountId == check.Id).FirstOrDefault();
+            model.Email = check.Email;
+             return View(model);
         }
 
         public IActionResult Privacy()
