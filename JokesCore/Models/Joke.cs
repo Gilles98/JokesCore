@@ -18,7 +18,7 @@ namespace JokesCore.Models
 
         public int Rating { get; set; }
 
-
+        public string Test { get; set; }
         //navigatie
 
         public IdentityUser Account { get; set; }
