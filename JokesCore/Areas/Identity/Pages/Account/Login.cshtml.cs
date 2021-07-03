@@ -80,7 +80,7 @@ namespace JokesCore.Areas.Identity.Pages.Account
                 IdentityUser user = await _userManager.FindByEmailAsync(Input.Email);
                 if (user != null)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");

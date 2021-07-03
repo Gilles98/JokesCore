@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Geplaatste grappen";
+}
+@model JokesCore.ViewModels.GeplaatsteGrappenViewModel;
+<div>
+    <div class="col-12">
+        <header>
+            <h2>
+                Geplaatste grappen
+            </h2>
+        </header>
+        @for (int i = 0; i < Model.Grappen.Count; i++)
+        {
+            <div class="col-sm-10 col-md-6 jokeItem">
+
+                <p>@Model.Grappen[i].Bericht</p>
+                <p class="stars">
+                    lalala
+                    <span class="fa fa-star star-0"></span>
+                    <span class="fa fa-star star-1"></span>
+                    <span class="fa fa-star star-2"></span>
+                    <span class="fa fa-star star-3"></span>
+                    <span class="fa fa-star star-4"></span>
+                </p>
+            </div>
+        }
+
+    </div>
+</div>

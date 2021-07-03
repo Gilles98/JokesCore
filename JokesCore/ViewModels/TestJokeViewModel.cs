@@ -14,6 +14,9 @@ namespace JokesCore.ViewModels
 
         public List<string> Emails { get; set; }
 
+
+        public List<IdentityUser> Gebruikers { get; set; }
+
         //create joke
 
         public Joke NewJoke { get; set; }

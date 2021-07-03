@@ -2,11 +2,21 @@
     border-radius: 5%;
     height:auto;
     margin:1.5em;
-    box-shadow: gray 0.4em 0.2em 0.5em 0.4em ;
+    box-shadow: black 0.4em 0.2em 0.5em 0.4em ;
+    font-size:1em;
+    width:20em;
+    color:black;
+    background:white;
 }
 .container-fluid{
     padding-left:0px;
     padding-right:0px;
+}
+.background {
+    background: white;
+}
+.navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(165, 242, 243, 1)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 *{
     margin:0px;
@@ -27,16 +37,11 @@
     }
 }
 
-@media (pointer:none){
-    .sidenav{
-        background-color:lightblue;
-    }
-}
 ul {
     list-style-type: none;
 }
 .circleHover {
-    pointer-events: none;  the fix! 
+    pointer-events: none; /* the fix! */
     display: none;
     width: 2.5em;
     height: 2.5em;
@@ -91,7 +96,7 @@ a:not([href]):not([tabindex]) {
             background-color:darkorange;
         }
 
-@media screen and (max-device-height:px) and (max-device-width:959px) {
+@media screen and (pointer:none) {
     .navbar {
         padding-left: 0;
         padding-top: .5rem;
@@ -110,6 +115,8 @@ a:not([href]):not([tabindex]) {
     }
 } 
 
+
+
 @media screen and (min-device-width:960px) and (max-width:1133px) and (min-width: 576px){
 
     .sidenav a, .btnLogout {
@@ -120,7 +127,12 @@ a:not([href]):not([tabindex]) {
         transition: 0.6s;
     }
 }
+@media (hover: none) and (pointer: coarse) {
 
+    .sidenav a, .btnLogout {
+        color: rgba(165, 242, 243, 1);
+    }
+}
 @media screen and (min-device-width: 960px) and (max-width:575px){
     .sidenav{
         width:35%;

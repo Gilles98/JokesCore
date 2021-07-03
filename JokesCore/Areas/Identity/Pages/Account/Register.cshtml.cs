@@ -68,6 +68,12 @@ namespace JokesCore.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+
+            [Required(ErrorMessage = "Een gebruikersnaam is vereist")]
+            [DataType(DataType.Text)]
+            public string Gebruikersnaam { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -89,7 +95,7 @@ namespace JokesCore.Areas.Identity.Pages.Account
                 }
                 else 
                 {
-                user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                user = new IdentityUser { UserName = Input.Gebruikersnaam, Email = Input.Email};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

@@ -39,7 +39,6 @@ namespace JokesCore
             services.AddControllersWithViews();
 
             var mailkit = Configuration.GetSection("Email").Get<MailKitOptions>();
-
             services.AddTransient<IEmailSender, EmailSender>(i =>
                 new EmailSender(
                     Configuration["EmailSender:Host"],
