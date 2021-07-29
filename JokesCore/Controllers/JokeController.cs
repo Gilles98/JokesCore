@@ -39,7 +39,48 @@ namespace JokesCore.Controllers
         //}
 
         // POST: JokeController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProcessForm(TestJokeViewModel viewModel)
+        {
 
+
+            var create = await CreateAsync(viewModel);
+            if (create != null)
+            {
+                return create;
+            }
+            return RedirectToAction("Index", "Error");
+        }
+
+        public async Task<ActionResult> CreateAsync(TestJokeViewModel model)
+        {
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (User.Identity.Name != null)
+                    {
+                        model.NewJoke.Account = await _userManager.FindByNameAsync(User.Identity.Name);
+                        model.NewJoke.AccountId = model.NewJoke.Account.Id;
+                    }
+                    await _context.Jokes.AddAsync(model.NewJoke);
+                    int ok = await _context.SaveChangesAsync();
+                    if (ok > 0)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+
+
+        }
 
         // GET: JokeController/Edit/5
         public ActionResult Edit(int id)

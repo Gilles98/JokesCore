@@ -30,7 +30,7 @@ namespace JokesCore.Controllers
 
         public async Task<IActionResult> Index(string id)
         {
-            var user = _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
             GeplaatsteGrappenViewModel viewModel = new GeplaatsteGrappenViewModel();
             viewModel.Grappen = new List<Models.Joke>();
             var k = await _context.Jokes.Where(x => x.AccountId == id).ToListAsync();

@@ -37,7 +37,7 @@ namespace JokesCore.Controllers
             //test
             
             List<Joke> k = await _context.Jokes.ToListAsync();
-            model.Jokes = new List<Joke>(k.TakeLast(3).Reverse());
+            model.Jokes = new (k.TakeLast(3).Reverse());
             model.Emails = new List<string>();
             model.Gebruikers = new List<IdentityUser>();
             foreach (Joke item in model.Jokes)
@@ -65,47 +65,7 @@ namespace JokesCore.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ProcessForm(TestJokeViewModel viewModel)
-        {
-
-         
-            var create = await CreateAsync(viewModel);
-            if (create != null)
-            {
-                return create;
-            }
-            return RedirectToAction("Index", "Error");
-        }
-        public async Task<ActionResult> CreateAsync(TestJokeViewModel model)
-        {
-
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    if (User.Identity.Name != null)
-                    {
-                        model.NewJoke.Account = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-                        model.NewJoke.AccountId = model.NewJoke.Account.Id;
-                    }
-                    await _context.Jokes.AddAsync(model.NewJoke);
-                    int ok = await _context.SaveChangesAsync();
-                    if (ok > 0)
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-
-
-        }
+     
 
         public IActionResult Privacy()
         {            return View();
